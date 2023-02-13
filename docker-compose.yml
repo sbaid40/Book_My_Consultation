@@ -1,0 +1,147 @@
+version: '3.3'
+#Define services
+services:
+  api-gateway:
+    build: api-gateway
+    container_name: api-gateway
+    image: bookmyconsultation/api-gateway:1.0.0
+    ports:
+    - "9191:9191"
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service
+      - kafka
+      - database
+  appointment-service:
+    build: appointment-service
+    container_name: appointment-service
+    image: bookmyconsultation/appointment-service:1.0.0
+    ports:
+    - "8086:8086"
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service
+      - kafka
+      - database
+  auth-service:
+    build: auth-service
+    container_name: auth-service
+    image: bookmyconsultation/auth-service:1.0.0
+    ports:
+    - "8081:8081"    
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service   
+  doc-service:
+    build: doc-service
+    container_name: doc-service
+    image: bookmyconsultation/doctor-service:1.0.0
+    ports:
+    - "8083:8083"    
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service
+      - kafka
+      - database
+  payment-service:
+    build: payment-service
+    container_name: payment-service
+    image: bookmyconsultation/payment-service:1.0.0
+    ports:
+    - "8084:8084"    
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service
+      - kafka
+      - database
+  rating-service:
+    build: rating-service
+    container_name: rating-service
+    image: bookmyconsultation/rating-service:1.0.0
+    ports:
+    - "8085:8085"    
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service
+      - kafka
+      - database
+  notification-service:
+    build: notification-service
+    container_name: notification-service
+    image: bookmyconsultation/notification-service:1.0.0
+    ports:
+    - "8080:8080"    
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service
+      - kafka 
+  user-service:
+    build: user-service
+    container_name: user-service
+    image: bookmyconsultation/user-service:1.0.0
+    ports:
+    - "8082:8082"    
+    networks:
+      - microservicesnet
+    depends_on:
+      - eureka-service
+      - kafka
+      - database        
+  eureka-service:
+    build: eureka-service
+    container_name: eureka-service
+    image: bookmyconsultation/eureka-service:1.0.0
+    ports:
+    - "8761:8761"
+    networks:
+      - microservicesnet
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+    depends_on:
+      - zookeeper
+    networks:
+      - microservicesnet
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - microservicesnet
+  database:
+    image: mysql:8.0
+    container_name: database
+    ports:
+    - "3306:3306"
+    networks:
+      - microservicesnet
+    environment:
+      MYSQL_DATABASE: bmc
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+  mongodb_container:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - "27017:27017"      
+networks:
+  microservicesnet:
+    driver: bridge
