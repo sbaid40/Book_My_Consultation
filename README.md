@@ -531,23 +531,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-## 👥 Authors & Contributors
-
-- **Upgrad** - Initial Development
-- **Contributors:** [Add your name here]
-
----
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-
-- **Issues:** [GitHub Issues](https://github.com/yourusername/BookMyConsultation/issues)
-- **Email:** support@bookmyconsultation.com
-- **Documentation:** [Wiki](https://github.com/yourusername/BookMyConsultation/wiki)
-
----
-
 ## 🎯 Future Enhancements
 
 - [ ] Video consultation integration
@@ -560,12 +543,3 @@ For issues, questions, or suggestions:
 - [ ] Advanced analytics dashboard
 
 ---
-
-<div align="center">
-
-**Made with ❤️ by Upgrad**
-
-⭐ If you find this project helpful, please star it!
-
-</div>
-
