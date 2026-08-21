@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.upgrad.appointmentservice.dto.AvailabilityData;
 import com.upgrad.appointmentservice.entity.Availability;
 import com.upgrad.appointmentservice.repository.AvailabilityRepository;
-import org.apache.tomcat.jni.Local;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

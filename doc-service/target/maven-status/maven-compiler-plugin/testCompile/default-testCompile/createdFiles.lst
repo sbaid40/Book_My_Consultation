@@ -1,0 +1,3 @@
+com\upgrad\doctorservice\model\DoctorTest.class
+com\upgrad\doctorservice\service\DoctorRegistrationServiceTest.class
+com\upgrad\doctorservice\service\DoctorDataServiceTest.class

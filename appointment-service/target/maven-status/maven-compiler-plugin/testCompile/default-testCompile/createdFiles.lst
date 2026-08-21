@@ -1,0 +1,4 @@
+com\upgrad\appointmentservice\dto\AppointmentRequestTest.class
+com\upgrad\appointmentservice\service\AvailabilityServiceTest.class
+com\upgrad\appointmentservice\dto\AvailabilityDataTest.class
+com\upgrad\appointmentservice\entity\AppointmentTest.class

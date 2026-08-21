@@ -12,7 +12,7 @@ spring:
         - id: APPOINTMENT-SERVICE
           uri: lb://APPOINTMENT-SERVICE
           predicates:
-            - Path=/appointments/**, /doctor/**, /prescriptions/**, /payment/**, /users/**/appointments
+            - Path=/appointments/**, /doctor/**, /prescriptions/**, /payment/**
 
         - id: AUTH-SERVICE
           uri: lb://AUTH-SERVICE

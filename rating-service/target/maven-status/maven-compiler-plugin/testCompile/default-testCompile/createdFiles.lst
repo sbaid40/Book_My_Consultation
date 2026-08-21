@@ -1,0 +1,4 @@
+com\upgrad\ratingservice\model\DoctorRatingTest.class
+com\upgrad\ratingservice\model\ErrorModelTest.class
+com\upgrad\ratingservice\exception\RatingValueInvalidExceptionTest.class
+com\upgrad\ratingservice\service\RatingServiceTest.class

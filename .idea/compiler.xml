@@ -7,15 +7,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="rating-service" />
         <module name="eureka-service" />
+        <module name="api-gateway" />
+        <module name="doc-service" />
+      </profile>
+      <profile name="Annotation profile for BookMyConsultation" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="rating-service" />
         <module name="auth-service" />
         <module name="payment-service" />
         <module name="appointment-service" />
         <module name="doctor-service" />
-        <module name="api-gateway" />
         <module name="user-service" />
-        <module name="doc-service" />
         <module name="notification-service" />
       </profile>
     </annotationProcessing>

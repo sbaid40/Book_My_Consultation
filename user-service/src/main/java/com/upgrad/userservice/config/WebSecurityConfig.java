@@ -2,61 +2,51 @@ package com.upgrad.userservice.config;
 
 import com.upgrad.userservice.security.JWTAuthenticationFilter;
 import com.upgrad.userservice.security.JWTTokenVerifier;
-import com.upgrad.userservice.security.JwtAuthenticationEntryPoint;
-//import com.upgrad.userservice.security.JwtRequestFilter;
 import com.upgrad.userservice.service.ApplicationUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableMethodSecurity(prePostEnabled = true)
+public class WebSecurityConfig {
 
-    @Autowired
-    PasswordEncoder encoder;
-
-    @Autowired
-    ApplicationUserDetailsService applicationUserDetailsService;
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilterAfter(new JWTTokenVerifier(),JWTAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers("/users/**").hasRole("USER")
-                .antMatchers(HttpMethod.POST,"/users/**").hasAuthority("WRITE")
-                .anyRequest()
-                .authenticated();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
-    }
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager))
+                .addFilterAfter(new JWTTokenVerifier(), JWTAuthenticationFilter.class)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/users/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/users/**").hasAuthority("WRITE")
+                        .anyRequest().authenticated());
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http, DaoAuthenticationProvider daoAuthenticationProvider) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(daoAuthenticationProvider);
+        return authenticationManagerBuilder.build();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(PasswordEncoder encoder, ApplicationUserDetailsService applicationUserDetailsService) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(applicationUserDetailsService);
         provider.setPasswordEncoder(encoder);
-        provider.setUserDetailsService(applicationUserDetailsService);
         return provider;
     }
 }

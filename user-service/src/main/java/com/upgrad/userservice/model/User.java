@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 @Getter

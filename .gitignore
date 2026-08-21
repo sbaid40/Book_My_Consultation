@@ -1,0 +1,31 @@
+# Build outputs (ignore module target folders and common build dirs)
+target/
+**/target/
+build/
+out/
+dist/
+
+# Java artifacts
+*.jar
+*.class
+*.original
+
+# IDEs and editors
+/.idea
+/.vscode
+*.iml
+
+# Node modules
+node_modules/
+
+# Gradle
+.gradle/
+
+# Environment and logs
+*.log
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+/auth-service/target

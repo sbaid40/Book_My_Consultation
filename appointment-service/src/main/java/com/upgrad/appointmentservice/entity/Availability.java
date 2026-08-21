@@ -2,7 +2,7 @@ package com.upgrad.appointmentservice.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;

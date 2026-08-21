@@ -13,7 +13,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 import java.io.IOException;
 
 @Component

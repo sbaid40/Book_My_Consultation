@@ -7,7 +7,7 @@ import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ses.SesClient;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 @RequiredArgsConstructor
 @Component

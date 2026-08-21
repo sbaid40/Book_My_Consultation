@@ -1,0 +1,9 @@
+com\upgrad\userservice\model\ErrorModelTest.class
+com\upgrad\userservice\model\UserTest.class
+com\upgrad\userservice\model\ApplicationRoleTest.class
+com\upgrad\userservice\service\UserOnboardingServiceTest.class
+com\upgrad\userservice\model\ApplicationUserTest.class
+com\upgrad\userservice\exception\RequestedResourceNotFoundExceptionTest.class
+com\upgrad\userservice\model\UsernamePasswordModelTest.class
+com\upgrad\userservice\service\UserDataServiceTest.class
+com\upgrad\userservice\model\ApplicationPermissionTest.class

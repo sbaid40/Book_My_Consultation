@@ -3,9 +3,9 @@ package com.upgrad.appointmentservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -20,8 +20,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Appointment {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @UuidGenerator
     @Column(name = "appointment_id")
     private String appointmentId;
 

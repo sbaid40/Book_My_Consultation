@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +74,7 @@ public class SesEmailService {
         props.put("mail.smtp.port",587);
         props.put("mail.smtp.starttls.enable","true");
         props.put("mail.smtp.auth","true");
-        javax.mail.Session session = javax.mail.Session.getDefaultInstance(props);
+        jakarta.mail.Session session = jakarta.mail.Session.getDefaultInstance(props);
         MimeMessage msg = new MimeMessage(session);
         msg.setFrom(fromEmail);
         msg.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
